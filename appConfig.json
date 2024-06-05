@@ -1,0 +1,65 @@
+{
+  "energy": {
+    "appName": "energy-service",
+    "appDescription": "",
+    "lambda": {
+      "timeoutSecs": 300,
+      "ecrRepo": "",
+      "environmentVariables": {
+        "OHME_ACCESS_VERSION": 1
+      }
+    },
+    "database": {
+      "pk": "tariffId",
+      "sk": "timestamp"
+    }
+  },
+
+  "customer": {
+    "appName": "customer-integration-service",
+    "appDescription": "",
+    "lambda": {
+      "timeoutSecs": 300,
+      "ecrRepo": "",
+      "environmentVariables": {
+        "OHME_ACCESS_VERSION": 1
+      }
+    },
+    "database": {
+      "pk": "customerId",
+      "sk": "timestamp"
+    }
+  },
+
+  "pricing": {
+    "appName": "pricing-processing-job-service",
+    "appDescription": "",
+    "lambda": {
+      "timeoutSecs": 300,
+      "ecrRepo": "",
+      "environmentVariables": {
+        "OHME_ACCESS_VERSION": 1
+      }
+    },
+    "database": {
+      "pk": "priceFileId",
+      "sk": "timestamp"
+    }
+  },
+
+  "order": {
+    "appName": "order-reconciliation-service",
+    "appDescription": "",
+    "lambda": {
+      "timeoutSecs": 300,
+      "ecrRepo": "",
+      "environmentVariables": {
+        "OHME_ACCESS_VERSION": 1
+      }
+    },
+    "database": {
+      "pk": "orderId",
+      "sk": "timestamp"
+    }
+  }
+}
