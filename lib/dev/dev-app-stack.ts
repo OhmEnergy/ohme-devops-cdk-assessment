@@ -14,14 +14,14 @@ export class DevAppStack extends cdk.Stack {
 
     // Energy Team App
     const energyAppConfig = appConfig["energy"];
-    const energyAppLogs = new aws_logs.LogGroup(this, "", {
+    const energyAppLogs = new aws_logs.LogGroup(this, "DevLogs-Energy", {
       logGroupName: `/aws/lambda/ohme-dev-${energyAppConfig.appName}`,
       logGroupClass: aws_logs.LogGroupClass.STANDARD,
       retention: aws_logs.RetentionDays.THREE_DAYS,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
-    const energyAppDb = new aws_dynamodb.Table(this, "", {
+    const energyAppDb = new aws_dynamodb.Table(this, "DevDynamoDB-Energy", {
       tableName: `ohme-dev-${energyAppConfig.appName}`,
       tableClass: aws_dynamodb.TableClass.STANDARD,
       partitionKey: {name: energyAppConfig.database.sk, type: aws_dynamodb.AttributeType.STRING},
@@ -30,7 +30,7 @@ export class DevAppStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.RETAIN
     })
 
-    const energyAppRole = new aws_iam.Role(this, "", {
+    const energyAppRole = new aws_iam.Role(this, "DevRole-Energy", {
       roleName: "LambdaAppServiceRole_" + energyAppConfig.appName,
       description: "",
       assumedBy: new aws_iam.ServicePrincipal("lambda.amazonaws.com"),
@@ -59,12 +59,12 @@ export class DevAppStack extends cdk.Stack {
       }
     })
 
-    const energyAppLambda = new aws_lambda.DockerImageFunction(this, "", {
+    const energyAppLambda = new aws_lambda.DockerImageFunction(this, "DevLambda-Energy", {
       functionName: "ohme-dev-" + energyAppConfig.appName,
       description: energyAppConfig.appDescription,
       timeout: cdk.Duration.seconds(energyAppConfig.lambda.timeoutSecs),
       code: aws_lambda.DockerImageCode.fromEcr(
-        aws_ecr.Repository.fromRepositoryArn(this, "", energyAppConfig.lambda.ecrRepo)
+        aws_ecr.Repository.fromRepositoryArn(this, "DevEcrRepo-Energy", energyAppConfig.lambda.ecrRepo)
       ),
       role: energyAppRole,
       logGroup: energyAppLogs,
@@ -76,23 +76,23 @@ export class DevAppStack extends cdk.Stack {
 
     // Customer Team App
     const customerAppConfig = appConfig["customer"];
-    const customerAppLogs = new aws_logs.LogGroup(this, "", {
+    const customerAppLogs = new aws_logs.LogGroup(this, "DevLogs-Customer", {
       logGroupName: `/aws/lambda/ohme-dev-${customerAppConfig.appName}`,
       logGroupClass: aws_logs.LogGroupClass.STANDARD,
       retention: aws_logs.RetentionDays.THREE_DAYS,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
-    const customerAppDb = new aws_dynamodb.Table(this, "", {
+    const customerAppDb = new aws_dynamodb.Table(this, "DevDynamoDB-Customer", {
       tableName: `ohme-dev-${customerAppConfig.appName}`,
       tableClass: aws_dynamodb.TableClass.STANDARD,
       partitionKey: {name: customerAppConfig.database.sk, type: aws_dynamodb.AttributeType.STRING},
       sortKey: {name: customerAppConfig.database.pk, type: aws_dynamodb.AttributeType.NUMBER},
       billingMode: aws_dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.RETAIN
-    })
+    });
 
-    const customerAppRole = new aws_iam.Role(this, "", {
+    const customerAppRole = new aws_iam.Role(this, "DevRole-Customer", {
       roleName: "LambdaAppServiceRole_" + customerAppConfig.appName,
       description: "",
       assumedBy: new aws_iam.ServicePrincipal("lambda.amazonaws.com"),
@@ -121,12 +121,12 @@ export class DevAppStack extends cdk.Stack {
       }
     })
 
-    const customerAppLambda = new aws_lambda.DockerImageFunction(this, "", {
+    const customerAppLambda = new aws_lambda.DockerImageFunction(this, "DevLambda-Customer", {
       functionName: "ohme-dev-" + customerAppConfig.appName,
       description: customerAppConfig.appDescription,
       timeout: cdk.Duration.seconds(customerAppConfig.lambda.timeoutSecs),
       code: aws_lambda.DockerImageCode.fromEcr(
-        aws_ecr.Repository.fromRepositoryArn(this, "", customerAppConfig.lambda.ecrRepo)
+        aws_ecr.Repository.fromRepositoryArn(this, "DevEcrRepo-Customer", customerAppConfig.lambda.ecrRepo)
       ),
       role: customerAppRole,
       logGroup: customerAppLogs,
@@ -138,14 +138,14 @@ export class DevAppStack extends cdk.Stack {
 
     // Pricing Team App
     const pricingAppConfig = appConfig["pricing"];
-    const pricingAppLogs = new aws_logs.LogGroup(this, "", {
+    const pricingAppLogs = new aws_logs.LogGroup(this, "DevLogs-Pricing", {
       logGroupName: `/aws/lambda/ohme-dev-${pricingAppConfig.appName}`,
       logGroupClass: aws_logs.LogGroupClass.STANDARD,
       retention: aws_logs.RetentionDays.THREE_DAYS,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
-    const pricingAppDb = new aws_dynamodb.Table(this, "", {
+    const pricingAppDb = new aws_dynamodb.Table(this, "DevDynamoDB-Pricing", {
       tableName: `ohme-dev-${pricingAppConfig.appName}`,
       tableClass: aws_dynamodb.TableClass.STANDARD,
       partitionKey: {name: pricingAppConfig.database.sk, type: aws_dynamodb.AttributeType.STRING},
@@ -154,7 +154,7 @@ export class DevAppStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.RETAIN
     })
 
-    const pricingAppRole = new aws_iam.Role(this, "", {
+    const pricingAppRole = new aws_iam.Role(this, "DevRole-Pricing", {
       roleName: "LambdaAppServiceRole_" + pricingAppConfig.appName,
       description: "",
       assumedBy: new aws_iam.ServicePrincipal("lambda.amazonaws.com"),
@@ -183,12 +183,12 @@ export class DevAppStack extends cdk.Stack {
       }
     })
 
-    const pricingAppLambda = new aws_lambda.DockerImageFunction(this, "", {
+    const pricingAppLambda = new aws_lambda.DockerImageFunction(this, "DevLambda-Pricing", {
       functionName: "ohme-dev-" + pricingAppConfig.appName,
       description: pricingAppConfig.appDescription,
       timeout: cdk.Duration.seconds(pricingAppConfig.lambda.timeoutSecs),
       code: aws_lambda.DockerImageCode.fromEcr(
-        aws_ecr.Repository.fromRepositoryArn(this, "", pricingAppConfig.lambda.ecrRepo)
+        aws_ecr.Repository.fromRepositoryArn(this, "DevEcrRepo-Pricing", pricingAppConfig.lambda.ecrRepo)
       ),
       role: pricingAppRole,
       logGroup: pricingAppLogs,
@@ -200,14 +200,14 @@ export class DevAppStack extends cdk.Stack {
 
     // Order Team App
     const orderAppConfig = appConfig["order"];
-    const orderAppLogs = new aws_logs.LogGroup(this, "", {
+    const orderAppLogs = new aws_logs.LogGroup(this, "DevLogs-Order", {
       logGroupName: `/aws/lambda/ohme-dev-${orderAppConfig.appName}`,
       logGroupClass: aws_logs.LogGroupClass.STANDARD,
       retention: aws_logs.RetentionDays.THREE_DAYS,
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
-    const orderAppDb = new aws_dynamodb.Table(this, "", {
+    const orderAppDb = new aws_dynamodb.Table(this, "DevDynamoDB-Order", {
       tableName: `ohme-dev-${orderAppConfig.appName}`,
       tableClass: aws_dynamodb.TableClass.STANDARD,
       partitionKey: {name: orderAppConfig.database.sk, type: aws_dynamodb.AttributeType.STRING},
@@ -216,7 +216,7 @@ export class DevAppStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.RETAIN
     })
 
-    const orderAppRole = new aws_iam.Role(this, "", {
+    const orderAppRole = new aws_iam.Role(this, "DevRole-Order", {
       roleName: "LambdaAppServiceRole_" + orderAppConfig.appName,
       description: "",
       assumedBy: new aws_iam.ServicePrincipal("lambda.amazonaws.com"),
@@ -245,12 +245,12 @@ export class DevAppStack extends cdk.Stack {
       }
     })
 
-    const orderAppLambda = new aws_lambda.DockerImageFunction(this, "", {
+    const orderAppLambda = new aws_lambda.DockerImageFunction(this, "DevLambda-Order", {
       functionName: "ohme-dev-" + orderAppConfig.appName,
       description: orderAppConfig.appDescription,
       timeout: cdk.Duration.seconds(orderAppConfig.lambda.timeoutSecs),
       code: aws_lambda.DockerImageCode.fromEcr(
-        aws_ecr.Repository.fromRepositoryArn(this, "", orderAppConfig.lambda.ecrRepo)
+        aws_ecr.Repository.fromRepositoryArn(this, "DevEcrRepo-Order", orderAppConfig.lambda.ecrRepo)
       ),
       role: orderAppRole,
       logGroup: orderAppLogs,
