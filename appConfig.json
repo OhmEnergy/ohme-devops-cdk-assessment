@@ -1,7 +1,7 @@
 {
   "energy": {
     "appName": "energy-service",
-    "appDescription": "",
+    "appDescription": "Calculate the energy output for devices",
     "lambda": {
       "timeoutSecs": 300,
       "ecrRepo": "arn:aws:ecr:eu-west-1:760429012021:repository/energy-service-app",
@@ -17,7 +17,7 @@
 
   "customer": {
     "appName": "customer-integration-service",
-    "appDescription": "",
+    "appDescription": "Integration of all customer data across systems in the business",
     "lambda": {
       "timeoutSecs": 300,
       "ecrRepo": "arn:aws:ecr:eu-west-1:760429012021:repository/customer-service-app",
@@ -33,7 +33,7 @@
 
   "pricing": {
     "appName": "pricing-processing-job-service",
-    "appDescription": "",
+    "appDescription": "Calculate the cost of a charge session",
     "lambda": {
       "timeoutSecs": 300,
       "ecrRepo": "arn:aws:ecr:eu-west-1:760429012021:repository/pricing-service-app",
@@ -48,8 +48,8 @@
   },
 
   "order": {
-    "appName": "order-reconciliation-service",
-    "appDescription": "",
+    "appName": "order-refunding-service",
+    "appDescription": "Process refunding of charge devices",
     "lambda": {
       "timeoutSecs": 300,
       "ecrRepo": "arn:aws:ecr:eu-west-1:760429012021:repository/order-service-app",

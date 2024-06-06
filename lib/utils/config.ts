@@ -8,7 +8,7 @@ export interface RepoEntry {
   readonly pipelineName: string;
 }
 
-export interface CicdStackConfig {
+export interface CiCdConfig {
   readonly codestarConnectionArn: string;
   readonly repo: RepoEntry;
   readonly env: Env;
@@ -30,7 +30,7 @@ export interface BaseAppConfig {
 export interface AppEnvConfig extends BaseAppConfig {}
 
 export class Config {
-  readonly cicd: CicdStackConfig;
+  readonly cicd: CiCdConfig;
   readonly dev: AppEnvConfig;
   readonly beta: AppEnvConfig;
   readonly prod: AppEnvConfig;

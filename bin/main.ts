@@ -11,6 +11,7 @@ new AppDeploymentPipeline(app, 'AppDeploymentPipeline', {
   codestarConnectionArn: config.cicd.codestarConnectionArn,
   repo: config.cicd.repo,
   env: config.cicd.env,
+  cicd: config.cicd,
   dev: config.dev,
   beta: config.beta,
   prod: config.prod
