@@ -1,0 +1,33 @@
+cicd:
+  codestarConnectionArn: "arn:aws:codestar-connections:eu-west-1:404890343276:connection/84186d10-6caf-433b-8fb1-b8b34b853e30"
+  repo:
+    repo: "app-services"
+    owner: "ohme"
+    branch: "main"
+    pipelineName: "app-services-pipeline"
+  env:
+    name: "cicd"
+    account: "404890343276"
+    region: "eu-west-1"
+    context: "cicd"
+
+dev:
+  env:
+    name: "dev"
+    account: "226002539315"
+    region: "eu-west-1"
+    context: "app-dev"
+
+beta:
+  env:
+    name: "beta"
+    account: "955371221426"
+    region: "eu-west-1"
+    context: "app-beta"
+
+prod:
+  env:
+    name: "prod"
+    account: "160494363787"
+    region: "eu-west-1"
+    context: "app-prod"
